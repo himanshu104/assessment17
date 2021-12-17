@@ -1,0 +1,33 @@
+private static boolean isPrime(int n) {
+    if (n == 2) {
+        return true;
+    } else if (n == 1 || n % 2 == 0) {
+        return false;
+    }
+    for (int i = 3; i * i <= n; i += 2) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+public static int primeCounter(String fileName) throws IOException {
+    try (Scanner s = new Scanner(new File(fileName))) {
+        while (s.hasNextInt()) {
+            int v = s.nextInt();
+            if (isPrime(v)) {
+                return v
+            }
+        }
+    }
+}
+
+public static void main(String args[]) {
+    try {
+        String file = new File(
+                System.getProperty("user.home"), "read.txt").getPath();
+        System.out.println(primeCounter(file));
+    } catch (IOException e) {
+        System.out.println("Couldn't find file! ");
+    }
+}
